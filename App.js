@@ -3,6 +3,8 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LandingPage from './components/LandingPage';
+import SignUpPage from './components/SignUpPage';
+import LoginPage from './components/LoginPage';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +15,10 @@ const App = () => {
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
-          options={{ headerShown: false }} // Hide the header for LandingPage
+          options={{ headerShown: false }}
         />
+        <Stack.Screen name="SignUp" component={SignUpPage} />
+        <Stack.Screen name="Login" component={LoginPage} />
         {/* Add more screens here if needed */}
       </Stack.Navigator>
     </NavigationContainer>
