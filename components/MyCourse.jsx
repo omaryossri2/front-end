@@ -1,10 +1,18 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const MyCourse = ({ isCart }) => {
+const MyCourse = ({ isCart, item }) => {
+  // console.log(item);
+  const { navigate } = useNavigation();
   return (
-    <View style={styles.myCourse}>
+    <Pressable
+      style={styles.myCourse}
+      onPress={() => {
+        navigate("Course Details", { item });
+      }}
+    >
       <View style={styles.imgContainer}>
         <Image source={require("../assets/OIP.jpg")} style={styles.img} />
       </View>
@@ -19,10 +27,10 @@ const MyCourse = ({ isCart }) => {
             </View>
           )}
         </View>
-        <Text style={styles.title}>Introduction to figma</Text>
+        <Text style={styles.title}>{item.title}</Text>
         {isCart && <Text style={styles.price}>$180.00</Text>}
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 15,
     fontWeight: "bold",
-    fontSize: 17,
+    fontSize: 16,
   },
   price: {
     fontSize: 13,

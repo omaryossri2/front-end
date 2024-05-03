@@ -1,13 +1,23 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Course = ({ item }) => {
   // console.log(item);
+  // console.log(item.id);
+
+  let CourseId = item.id;
+  const { navigate } = useNavigation();
   return (
     <View style={styles.course}>
       {/* Image and image container */}
-      <View style={styles.imgContainer}>
+      <Pressable
+        style={styles.imgContainer}
+        onPress={() => {
+          navigate("Course Details", { item });
+        }}
+      >
         {/* Add TO Cart Icon */}
 
         <View style={styles.toCart}>
@@ -19,7 +29,7 @@ const Course = ({ item }) => {
           />
         </View>
         <Image source={require("../assets/OIP.jpg")} style={styles.img} />
-      </View>
+      </Pressable>
       <Text style={styles.courseName}>{item.title}</Text>
       <Text style={styles.coursePrice}>$180.00</Text>
     </View>

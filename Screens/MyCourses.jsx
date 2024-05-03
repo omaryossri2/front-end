@@ -5,11 +5,11 @@ import MyCourse from "../components/MyCourse";
 
 const MyCourses = ({ isCart }) => {
   const array = [
-    { id: 1, title: "Course 1", price: 19.99 },
-    { id: 2, title: "Course 2", price: 24.99 },
-    { id: 3, title: "Course 3", price: 29.99 },
-    { id: 4, title: "Course 4", price: 14.99 },
-    { id: 5, title: "Course 5", price: 39.99 },
+    { id: 1, title: "Web Development Bootcamp", price: 199.99 },
+    { id: 2, title: "JavaScript Fundamentals", price: 49.99 },
+    { id: 3, title: "Python for Data Science", price: 79.99 },
+    { id: 4, title: "UX Design Principles", price: 59.99 },
+    { id: 5, title: "Mobile App Development", price: 149.99 },
   ];
 
   return (

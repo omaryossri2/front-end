@@ -1,8 +1,11 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Course from "./Course";
+import { useNavigation } from "@react-navigation/native";
 
 const Courses = () => {
+  const { navigate } = useNavigation();
+
   const array = [
     { id: 1, title: "Course 1", price: 19.99 },
     { id: 2, title: "Course 2", price: 24.99 },
@@ -15,7 +18,14 @@ const Courses = () => {
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.title}>Courses</Text>
-        <Text style={styles.see}>See all</Text>
+        <Text
+          style={styles.see}
+          onPress={() => {
+            navigate("See All courses");
+          }}
+        >
+          See all
+        </Text>
       </View>
 
       <View style={styles.courses}>

@@ -1,35 +1,47 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
+  const { navigate } = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.userName}>UserName</Text>
       <View style={styles.itemContainer}>
-        <View style={styles.item}>
+        <Pressable
+          onPress={() => {
+            navigate("edit profile");
+          }}
+          style={styles.item}
+        >
           <View style={styles.edit}>
             <Ionicons name="person-outline" size={24} color="black" />
             <Text style={styles.txt}>Edit Profile</Text>
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
-        </View>
-        <View style={styles.item}>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigate("settings");
+          }}
+          style={styles.item}
+        >
           <View style={styles.edit}>
             <Ionicons name="settings-outline" size={24} color="black" />
             <Text style={styles.txt}>Settings</Text>
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
-        </View>
-        <View style={styles.item}>
+        </Pressable>
+        <Pressable style={styles.item}>
           <View style={styles.edit}>
             <AntDesign name="logout" size={24} color="black" />
             <Text style={styles.txt}>Logout</Text>
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
-        </View>
+        </Pressable>
       </View>
     </SafeAreaView>
   );

@@ -1,12 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Categories = () => {
+  const { navigate } = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.header}>Categories</Text>
-        <Text style={styles.see}>See all</Text>
+        <Text
+          style={styles.see}
+          onPress={() => {
+            navigate("See All categories");
+          }}
+        >
+          See all
+        </Text>
       </View>
       <View style={styles.categories}>
         <View style={styles.category}>
@@ -33,7 +43,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     // paddingRight: 30,
     gap: 20,
-    
   },
   head: {
     flexDirection: "row",

@@ -3,6 +3,7 @@ import React from "react";
 import Greet from "../components/Greet";
 import Categories from "../components/Categories";
 import Courses from "../components/Courses";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
   return (
