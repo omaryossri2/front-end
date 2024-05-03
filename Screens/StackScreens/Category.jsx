@@ -4,7 +4,7 @@ import React from "react";
 const Category = () => {
   return (
     <View>
-      <Text>Category</Text>
+      <Text>Courses of this category</Text>
     </View>
   );
 };

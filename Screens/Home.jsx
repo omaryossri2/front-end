@@ -10,7 +10,7 @@ const Home = () => {
     <View style={styles.container}>
       <Greet />
       <Categories />
-      <Courses />
+      <Courses seeAll={false} />
     </View>
   );
 };

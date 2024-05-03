@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,18 +19,38 @@ const Categories = () => {
         </Text>
       </View>
       <View style={styles.categories}>
-        <View style={styles.category}>
+        <Pressable
+          onPress={() => {
+            navigate("Category");
+          }}
+          style={styles.category}
+        >
           <Text>C</Text>
-        </View>
-        <View style={styles.category}>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigate("Category");
+          }}
+          style={styles.category}
+        >
           <Text>C</Text>
-        </View>
-        <View style={styles.category}>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigate("Category");
+          }}
+          style={styles.category}
+        >
           <Text>C</Text>
-        </View>
-        <View style={styles.category}>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            navigate("Category");
+          }}
+          style={styles.category}
+        >
           <Text>C</Text>
-        </View>
+        </Pressable>
       </View>
     </View>
   );

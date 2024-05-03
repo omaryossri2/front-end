@@ -3,7 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MyCourse from "../components/MyCourse";
 
-const MyCourses = ({ isCart }) => {
+const MyCourses = ({ isCart, seeAll }) => {
   const array = [
     { id: 1, title: "Web Development Bootcamp", price: 199.99 },
     { id: 2, title: "JavaScript Fundamentals", price: 49.99 },
@@ -18,7 +18,9 @@ const MyCourses = ({ isCart }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={array}
-          renderItem={(item) => <MyCourse item={item.item} isCart={isCart} />}
+          renderItem={(item) => (
+            <MyCourse item={item.item} isCart={isCart} seeAll={seeAll} />
+          )}
           keyExtractor={(item) => item.id}
         />
       </View>

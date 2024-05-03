@@ -3,9 +3,10 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const MyCourse = ({ isCart, item }) => {
+const MyCourse = ({ isCart, item, seeAll }) => {
   // console.log(item);
   const { navigate } = useNavigation();
+
   return (
     <Pressable
       style={styles.myCourse}
@@ -23,7 +24,11 @@ const MyCourse = ({ isCart, item }) => {
           </View>
           {isCart && (
             <View style={styles.cartContainer}>
-              <Ionicons name="cart" size={24} color="black" />
+              {seeAll ? (
+                <Ionicons name="cart-outline" size={24} color="black" />
+              ) : (
+                <Ionicons name="cart" size={24} color="black" />
+              )}
             </View>
           )}
         </View>
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
   myCourse: {
     width: "100%",
     // backgroundColor: "gray",
-    height: 150,
+    height: 180,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#ddd",
@@ -61,6 +66,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
   details: {
+    width: 200,
     marginTop: 20,
   },
   categoryContainer: {

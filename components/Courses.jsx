@@ -3,7 +3,7 @@ import React from "react";
 import Course from "./Course";
 import { useNavigation } from "@react-navigation/native";
 
-const Courses = () => {
+const Courses = ({ seeAll }) => {
   const { navigate } = useNavigation();
 
   const array = [
@@ -14,7 +14,16 @@ const Courses = () => {
     { id: 5, title: "Course 5", price: 39.99 },
   ];
 
-  return (
+  return seeAll ? (
+    <View style={styles.courses}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={array}
+        renderItem={(item) => <Course item={item.item} />}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  ) : (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.title}>Courses</Text>

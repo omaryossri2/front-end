@@ -1,5 +1,6 @@
 import EditProfile from "../../Screens/ProfileStack/EditProfile";
 import Settings from "../../Screens/ProfileStack/Settings";
+import Category from "../../Screens/StackScreens/Category";
 import CourseDetails from "../../Screens/StackScreens/CourseDetails";
 import SeeAllCategories from "../../Screens/StackScreens/SeeAllCategories";
 import SeeAllCourses from "../../Screens/StackScreens/SeeAllCourses";
@@ -18,9 +19,36 @@ const HomeStackGroup = () => {
         name="TabGroup"
         component={TabGroup}
       />
-      <Stack.Screen name="Course Details" component={CourseDetails} />
-      <Stack.Screen name="See All courses" component={SeeAllCourses} />
-      <Stack.Screen name="See All categories" component={SeeAllCategories} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="Course Details"
+        component={CourseDetails}
+      />
+      <Stack.Screen name="Category" component={Category} />
+      <Stack.Screen
+        options={{
+          headerTitleAlign: "center",
+          headerTitle: "Courses",
+          headerStyle: {
+            height: 100,
+          },
+        }}
+        name="See All courses"
+        component={SeeAllCourses}
+      />
+      <Stack.Screen
+        options={{
+          headerTitleAlign: "center",
+          headerTitle: "Categories",
+          headerStyle: {
+            height: 100,
+          },
+        }}
+        name="See All categories"
+        component={SeeAllCategories}
+      />
       <Stack.Screen
         options={{
           headerTitleAlign: "center",
