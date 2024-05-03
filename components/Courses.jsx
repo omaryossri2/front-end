@@ -17,6 +17,7 @@ const Courses = () => {
         <Text style={styles.title}>Courses</Text>
         <Text style={styles.see}>See all</Text>
       </View>
+
       <View style={styles.courses}>
         <FlatList
           horizontal
