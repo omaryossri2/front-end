@@ -9,7 +9,12 @@ const Profile = () => {
   const { navigate } = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.userName}>UserName</Text>
+      <View style={styles.profile}>
+        <View style={styles.imgContainer}>
+          <Ionicons name="person-outline" size={100} color="black" />
+        </View>
+        <Text style={styles.userName}>UserName</Text>
+      </View>
       <View style={styles.itemContainer}>
         <Pressable
           onPress={() => {
@@ -58,8 +63,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
-    marginTop: 20,
-    marginBottom: 100,
   },
   itemContainer: {
     gap: 30,
@@ -78,5 +81,24 @@ const styles = StyleSheet.create({
   },
   txt: {
     fontSize: 18,
+  },
+  profile: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 50,
+    gap: 10,
+  },
+  imgContainer: {
+    width: 140,
+    height: 140,
+    backgroundColor: "gray",
+    alignSelf: "center",
+    borderRadius: 70,
+    // borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
   },
 });

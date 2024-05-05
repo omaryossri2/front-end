@@ -7,7 +7,11 @@ const stack = createStackNavigator();
 
 const StackGroup = () => {
   return (
-    <stack.Navigator>
+    <stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <stack.Screen name="Landing" component={LandingPage} />
       <stack.Screen name="Sign Up" component={SignUpPage} />
       <stack.Screen name="Login" component={LoginPage} />
