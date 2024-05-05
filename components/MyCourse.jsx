@@ -3,7 +3,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const MyCourse = ({ isCart, item, seeAll }) => {
+const MyCourse = ({ isCart, item, seeAll, purchased }) => {
   // console.log(item);
   const { navigate } = useNavigation();
 
@@ -11,7 +11,7 @@ const MyCourse = ({ isCart, item, seeAll }) => {
     <Pressable
       style={styles.myCourse}
       onPress={() => {
-        navigate("Course Details", { item });
+        navigate("Course Details", { item, purchased });
       }}
     >
       <View style={styles.imgContainer}>

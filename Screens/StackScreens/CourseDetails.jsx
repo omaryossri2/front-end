@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const CourseDetails = () => {
   const route = useRoute();
   const {
-    params: { item },
+    params: { item, purchased },
   } = route;
 
   // console.log(item);
@@ -32,15 +32,17 @@ const CourseDetails = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.enroll}>
-        <View style={styles.price}>
-          <Text style={styles.totalPrice}>Total Price</Text>
-          <Text style={styles.pricetxt}>$180.00$</Text>
+      {!purchased && (
+        <View style={styles.enroll}>
+          <View style={styles.price}>
+            <Text style={styles.totalPrice}>Total Price</Text>
+            <Text style={styles.pricetxt}>$180.00$</Text>
+          </View>
+          <View style={styles.btn}>
+            <Text style={styles.btnTxt}>Enroll Now</Text>
+          </View>
         </View>
-        <View style={styles.btn}>
-          <Text style={styles.btnTxt}>Enroll Now</Text>
-        </View>
-      </View>
+      )}
     </View>
   );
 };

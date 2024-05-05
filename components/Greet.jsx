@@ -7,7 +7,7 @@ const Greet = () => {
     <View style={styles.greeting}>
       <Text style={[styles.clr, styles.userGreet]}>Hi, John</Text>
       <Text style={[styles.clr, styles.txt]}>Let's start learning!</Text>
-      <Search />
+      <Search editable={false} />
     </View>
   );
 };

@@ -1,56 +1,40 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import CategoryIcon from "./CategoryIcon";
 
 const Categories = () => {
   const { navigate } = useNavigation();
+
+  let categories = [
+    { id: 1, name: "Technology" },
+    { id: 2, name: "Mathematics" },
+    { id: 3, name: "Science" },
+    { id: 4, name: "Languages" },
+    { id: 5, name: "Arts" },
+  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.header}>Categories</Text>
-        <Text
+        {/* <Text
           style={styles.see}
           onPress={() => {
             navigate("See All categories");
           }}
         >
           See all
-        </Text>
+        </Text> */}
       </View>
       <View style={styles.categories}>
-        <Pressable
-          onPress={() => {
-            navigate("Category");
-          }}
-          style={styles.category}
-        >
-          <Text>C</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            navigate("Category");
-          }}
-          style={styles.category}
-        >
-          <Text>C</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            navigate("Category");
-          }}
-          style={styles.category}
-        >
-          <Text>C</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            navigate("Category");
-          }}
-          style={styles.category}
-        >
-          <Text>C</Text>
-        </Pressable>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={categories}
+          renderItem={(item) => <CategoryIcon item={item.item} />}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );
@@ -80,13 +64,5 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: "row",
     gap: 15,
-  },
-  category: {
-    backgroundColor: "#c2c3c5",
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

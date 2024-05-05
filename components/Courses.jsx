@@ -19,7 +19,7 @@ const Courses = ({ seeAll }) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={array}
-        renderItem={(item) => <Course item={item.item} />}
+        renderItem={(item) => <Course item={item.item} purchased={false} />}
         keyExtractor={(item) => item.id}
       />
     </View>

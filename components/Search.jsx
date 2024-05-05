@@ -1,15 +1,27 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const Search = () => {
+const Search = ({ editable }) => {
   const [search, setSearch] = useState("");
+  const { navigate } = useNavigation();
 
   return (
-    <View style={styles.search}>
+    <Pressable
+      style={styles.search}
+      onPress={() => {
+        navigate("Search Courses");
+      }}
+    >
       <Ionicons name="search-outline" size={24} color="black" />
-      <TextInput placeholder="Search..." onChangeText={setSearch} />
-    </View>
+      <TextInput
+        placeholder="Search..."
+        onChangeText={setSearch}
+        editable={editable}
+        autoFocus={editable}
+      />
+    </Pressable>
   );
 };
 

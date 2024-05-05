@@ -31,7 +31,7 @@ const TabGroup = () => {
           borderTopWidth: 0,
           elevation: 0, //Android
           shadowOpacity: 0, // IOS
-          marginBottom: 10,
+          // paddingBottom: 10,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           // height: 40,

@@ -3,7 +3,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const Course = ({ item }) => {
+const Course = ({ item, purchased }) => {
   // console.log(item);
   // console.log(item.id);
 
@@ -15,7 +15,7 @@ const Course = ({ item }) => {
       <Pressable
         style={styles.imgContainer}
         onPress={() => {
-          navigate("Course Details", { item });
+          navigate("Course Details", { item, purchased });
         }}
       >
         {/* Add TO Cart Icon */}

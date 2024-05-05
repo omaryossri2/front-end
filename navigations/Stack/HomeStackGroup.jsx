@@ -2,6 +2,7 @@ import EditProfile from "../../Screens/ProfileStack/EditProfile";
 import Settings from "../../Screens/ProfileStack/Settings";
 import Category from "../../Screens/StackScreens/Category";
 import CourseDetails from "../../Screens/StackScreens/CourseDetails";
+import SearchCourses from "../../Screens/StackScreens/SearchCourses";
 import SeeAllCategories from "../../Screens/StackScreens/SeeAllCategories";
 import SeeAllCourses from "../../Screens/StackScreens/SeeAllCourses";
 import TabGroup from "../Tabs/TabGroup";
@@ -26,7 +27,13 @@ const HomeStackGroup = () => {
         name="Course Details"
         component={CourseDetails}
       />
-      <Stack.Screen name="Category" component={Category} />
+      <Stack.Screen
+        name="Category"
+        component={Category}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
       <Stack.Screen
         options={{
           headerTitleAlign: "center",
@@ -38,7 +45,7 @@ const HomeStackGroup = () => {
         name="See All courses"
         component={SeeAllCourses}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{
           headerTitleAlign: "center",
           headerTitle: "Categories",
@@ -48,7 +55,7 @@ const HomeStackGroup = () => {
         }}
         name="See All categories"
         component={SeeAllCategories}
-      />
+      /> */}
       <Stack.Screen
         options={{
           headerTitleAlign: "center",
@@ -70,6 +77,13 @@ const HomeStackGroup = () => {
         }}
         name="settings"
         component={Settings}
+      />
+      <Stack.Screen
+        name="Search Courses"
+        component={SearchCourses}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );

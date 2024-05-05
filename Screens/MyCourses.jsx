@@ -2,6 +2,7 @@ import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MyCourse from "../components/MyCourse";
+import { useRoute } from "@react-navigation/native";
 
 const MyCourses = ({ isCart, seeAll }) => {
   const array = [
@@ -12,6 +13,9 @@ const MyCourses = ({ isCart, seeAll }) => {
     { id: 5, title: "Mobile App Development", price: 149.99 },
   ];
 
+  const route = useRoute();
+  const purchased = route.name === "My Courses" ? true : false;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.myCourses}>
@@ -19,7 +23,12 @@ const MyCourses = ({ isCart, seeAll }) => {
           showsVerticalScrollIndicator={false}
           data={array}
           renderItem={(item) => (
-            <MyCourse item={item.item} isCart={isCart} seeAll={seeAll} />
+            <MyCourse
+              item={item.item}
+              isCart={isCart}
+              seeAll={seeAll}
+              purchased={purchased}
+            />
           )}
           keyExtractor={(item) => item.id}
         />

@@ -7,7 +7,7 @@ const SeeAllCourses = () => {
   return (
     <View style={styles.container}>
       {/* <Courses seeAll={true} /> */}
-      <MyCourses isCart={true} seeAll={true} />
+      <MyCourses isCart={true} seeAll={true} purchased={false} />
     </View>
   );
 };
