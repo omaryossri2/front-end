@@ -1,6 +1,7 @@
 import EditProfile from "../../Screens/ProfileStack/EditProfile";
 import Settings from "../../Screens/ProfileStack/Settings";
 import Category from "../../Screens/StackScreens/Category";
+import Congratulations from "../../Screens/StackScreens/Congratulations";
 import CourseDetails from "../../Screens/StackScreens/CourseDetails";
 import SearchCourses from "../../Screens/StackScreens/SearchCourses";
 import SeeAllCategories from "../../Screens/StackScreens/SeeAllCategories";
@@ -81,6 +82,13 @@ const HomeStackGroup = () => {
       <Stack.Screen
         name="Search Courses"
         component={SearchCourses}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Congratulations"
+        component={Congratulations}
         options={{
           headerShown: false,
         }}

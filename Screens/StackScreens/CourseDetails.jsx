@@ -1,10 +1,18 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const CourseDetails = () => {
   const route = useRoute();
+  const { navigate } = useNavigation();
   const {
     params: { item, purchased },
   } = route;
@@ -38,9 +46,14 @@ const CourseDetails = () => {
             <Text style={styles.totalPrice}>Total Price</Text>
             <Text style={styles.pricetxt}>$180.00$</Text>
           </View>
-          <View style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigate("Congratulations");
+            }}
+          >
             <Text style={styles.btnTxt}>Enroll Now</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       )}
     </View>
