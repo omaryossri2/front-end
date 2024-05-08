@@ -1,50 +1,41 @@
-import {
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import MyCourse from "../components/MyCourse";
 
-const MyCourses = () => {
-  const array = [
-    { id: 1, title: "Course 1", price: 19.99 },
-    { id: 2, title: "Course 2", price: 24.99 },
-    { id: 3, title: "Course 3", price: 29.99 },
-    { id: 4, title: "Course 4", price: 14.99 },
-    { id: 5, title: "Course 5", price: 39.99 },
-  ];
-
-  const route = useRoute();
-  // console.log(route.name);
-
-  const purchased = route.name === "My Courses" ? true : false;
-
+const SearchedCourse = ({ item }) => {
+  const { navigate } = useNavigation();
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={array}
-        renderItem={(item) => (
-          <MyCourse item={item.item} purchased={purchased} />
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </SafeAreaView>
+    <Pressable style={styles.myCourse}>
+      <Pressable
+        style={styles.imgContainer}
+        onPress={() => {
+          navigate("Course Details", { item });
+        }}
+      >
+        <Image style={styles.img} source={require("../assets/OIP.jpg")} />
+      </Pressable>
+      <View style={styles.details}>
+        <View style={styles.cart}>
+          <View style={styles.categoryContainer}>
+            <Text style={styles.category}>category</Text>
+          </View>
+
+          <View style={styles.cartContainer}>
+            <Ionicons name="cart" size={24} color="black" />
+          </View>
+        </View>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.price}>${item.price}</Text>
+      </View>
+    </Pressable>
   );
 };
 
-export default MyCourses;
+export default SearchedCourse;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   myCourse: {
     width: "90%",
     // backgroundColor: "gray",
@@ -54,7 +45,7 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
     flexDirection: "row",
     gap: 15,
-    marginBottom: 20,
+    marginVertical: 20,
     marginHorizontal: 10,
   },
   imgContainer: {

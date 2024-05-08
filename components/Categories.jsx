@@ -1,26 +1,44 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Category from "./Category";
 
 const Categories = () => {
+  const categories = [
+    {
+      id: 1,
+      name: "category 1",
+    },
+    {
+      id: 2,
+      name: "category 2",
+    },
+    {
+      id: 3,
+      name: "category 3",
+    },
+    {
+      id: 4,
+      name: "category 4",
+    },
+    {
+      id: 5,
+      name: "category 5",
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.header}>Categories</Text>
-        <Text style={styles.see}>See all</Text>
       </View>
       <View style={styles.categories}>
-        <View style={styles.category}>
-          <Text>C</Text>
-        </View>
-        <View style={styles.category}>
-          <Text>C</Text>
-        </View>
-        <View style={styles.category}>
-          <Text>C</Text>
-        </View>
-        <View style={styles.category}>
-          <Text>C</Text>
-        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={categories}
+          renderItem={(item) => <Category item={item.item} />}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );
@@ -33,7 +51,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     // paddingRight: 30,
     gap: 20,
-    
   },
   head: {
     flexDirection: "row",
@@ -51,13 +68,5 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: "row",
     gap: 15,
-  },
-  category: {
-    backgroundColor: "#c2c3c5",
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

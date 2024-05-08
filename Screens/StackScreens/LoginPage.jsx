@@ -1,76 +1,139 @@
 // components/LoginPage.js
 
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const LoginPage = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginPage = () => {
+  const { navigate } = useNavigation();
 
-  const handleLogin = () => {
-    // Implement login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Navigate to another page after successful login
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        placeholderTextColor='gray'
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        placeholderTextColor='gray'
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.txt}>Hi welcome back, you've been missed</Text>
+      </View>
+
+      <View style={styles.inputsContainer}>
+        <View style={styles.txtContainer}>
+          <Text>Email</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Email"
+            onChangeText={setEmail}
+          />
+        </View>
+        <View style={styles.txtContainer}>
+          <Text>Password</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Password"
+            onChangeText={setPassword}
+          />
+        </View>
+      </View>
+
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-    </View>
+
+      <View style={styles.DontHave}>
+        <Text>Already have an account</Text>
+        <Text
+          onPress={() => {
+            navigate("Sign Up");
+          }}
+          style={styles.signUp}
+        >
+          Sign In
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingTop: 100,
+    paddingHorizontal: 25,
+    gap: 20,
+  },
+  header: {
+    gap: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  txt: {
+    color: "#ccc",
+    textAlign: "center",
+    width: "80%",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontWeight: "bold",
+  },
+
+  inputsContainer: {
+    gap: 20,
+    paddingTop: 20,
+    // width: "100%",
+    // width: "auto",
+    // backgroundColor: "black",
+  },
+  txtContainer: {
+    gap: 5,
+  },
+  textInput: {
+    backgroundColor: "#c2c3c5",
+    // backgroundColor: "blue",
+
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    // width: "100%",
+  },
+  button: {
+    backgroundColor: "#007bff",
+    marginTop: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   input: {
-    width: '100%',
+    width: "100%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: '#007bff',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
+  DontHave: {
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "center",
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+  signUp: {
+    color: "#0961f5",
+    textDecorationLine: "underline",
   },
 });
 

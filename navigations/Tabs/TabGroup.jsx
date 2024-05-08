@@ -31,7 +31,6 @@ const TabGroup = () => {
           borderTopWidth: 0,
           elevation: 0, //Android
           shadowOpacity: 0, // IOS
-          marginBottom: 10,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           // height: 40,
@@ -46,9 +45,39 @@ const TabGroup = () => {
       })}
     >
       <tab.Screen name="Home" component={Home} />
-      <tab.Screen name="My Courses" component={MyCourses} />
-      <tab.Screen name="Cart" component={Cart} />
-      <tab.Screen name="Profile" component={Profile} />
+      <tab.Screen
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerStyle: {
+            height: 100,
+          },
+        }}
+        name="My Courses"
+        component={MyCourses}
+      />
+      <tab.Screen
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerStyle: {
+            height: 100,
+          },
+        }}
+        name="Cart"
+        component={Cart}
+      />
+      <tab.Screen
+        options={{
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerStyle: {
+            height: 100,
+          },
+        }}
+        name="Profile"
+        component={Profile}
+      />
     </tab.Navigator>
   );
 };
