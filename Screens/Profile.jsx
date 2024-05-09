@@ -9,7 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 const Profile = () => {
   const { navigate } = useNavigation();
   const { logout, user } = useContext(AuthContext);
-  console.log(user);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profile}>
@@ -31,13 +31,18 @@ const Profile = () => {
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
         </Pressable>
-        {/* <Pressable style={styles.item}>
+        <Pressable
+          style={styles.item}
+          onPress={() => {
+            navigate("settings");
+          }}
+        >
           <View style={styles.edit}>
             <Ionicons name="settings-outline" size={24} color="black" />
             <Text style={styles.txt}>Settings</Text>
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
-        </Pressable> */}
+        </Pressable>
         <Pressable
           style={styles.item}
           onPress={() => {

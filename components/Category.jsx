@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Category = ({ item }) => {
+  const { navigate } = useNavigation();
+  // console.log(item);
   return (
-    <View style={styles.category}>
-      <Text>{item.name}</Text>
-    </View>
+    <Pressable
+      style={styles.category}
+      onPress={() => {
+        navigate("CategoryCourses", { item });
+      }}
+    >
+      <Text style={styles.txt}>{item.category}</Text>
+    </Pressable>
   );
 };
 
@@ -20,5 +28,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
+  },
+  txt: {
+    fontWeight: "bold",
+    fontSize: 10,
   },
 });

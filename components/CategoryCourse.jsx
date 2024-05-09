@@ -1,22 +1,19 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../context/AuthContext";
 
-const MyCourse = ({ item, purchased }) => {
+const CategoryCourse = ({ item }) => {
   const { user } = useContext(AuthContext);
   const { navigate } = useNavigation();
-  // const route = useRoute();
-  // console.log(route.name);
-
   return (
     <Pressable style={styles.myCourse}>
       <Pressable
         style={styles.imgContainer}
         onPress={() => {
-          navigate("Course Details", { item, purchased, user });
+          navigate("Course Details", { item, user });
         }}
       >
         <Image style={styles.img} source={{ uri: item.imagepath }} />
@@ -26,14 +23,19 @@ const MyCourse = ({ item, purchased }) => {
           <View style={styles.categoryContainer}>
             <Text style={styles.category}>{item.category}</Text>
           </View>
+
+          <View style={styles.cartContainer}>
+            <Ionicons name="cart-outline" size={24} color="black" />
+          </View>
         </View>
         <Text style={styles.title}>{item.coursename}</Text>
+        <Text style={styles.price}>${item.price}</Text>
       </View>
     </Pressable>
   );
 };
 
-export default MyCourse;
+export default CategoryCourse;
 
 const styles = StyleSheet.create({
   myCourse: {
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
     flexDirection: "row",
     gap: 15,
-    marginBottom: 20,
+    marginVertical: 20,
     marginHorizontal: 10,
   },
   imgContainer: {

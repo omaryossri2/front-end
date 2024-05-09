@@ -4,9 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Ionicons } from "@expo/vector-icons";
 import SearchedCourse from "../../components/SearchedCourse";
+import { API_URL } from "@env";
 
 const SearchCourses = () => {
   const [searchItem, setSearchItem] = useState("");
+  const [searchedCourses, setSearchedCourses] = useState();
 
   const array = [
     { id: 1, title: "Course 1", price: 19.99 },
@@ -15,6 +17,31 @@ const SearchCourses = () => {
     { id: 4, title: "Course 4", price: 14.99 },
     { id: 5, title: "Course 5", price: 39.99 },
   ];
+
+  const searchCourse = async () => {
+    try {
+      if (!searchItem.trim()) {
+        setSearchedCourses([]); // Clear courses if search term is empty
+        return; // Return early if search term is empty
+      }
+      const res = await fetch(`${API_URL}/api/courses/search/${searchItem}`);
+
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch courses: ${res.status} ${res.statusText}`
+        );
+      }
+
+      const data = await res.json();
+      setSearchedCourses(data);
+    } catch (error) {
+      console.error("Error searching for courses:", error);
+    }
+  };
+
+  useEffect(() => {
+    searchCourse();
+  }, [searchItem]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,12 +55,13 @@ const SearchCourses = () => {
           />
         </View>
       </View>
-
-      <FlatList
-        data={array}
-        renderItem={(item) => <SearchedCourse item={item.item} />}
-        keyExtractor={(item) => item.id}
-      />
+      {searchedCourses && (
+        <FlatList
+          data={searchedCourses}
+          renderItem={(item) => <SearchedCourse item={item.item} />}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </SafeAreaView>
   );
 };

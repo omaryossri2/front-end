@@ -10,9 +10,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import * as FileSystem from "expo-file-system";
+import { API_URL } from "@env";
 
 const SignUpPage = () => {
   const { navigate } = useNavigation();
@@ -27,7 +26,7 @@ const SignUpPage = () => {
 
   const handleSignUp = async () => {
     try {
-      const res = await fetch("http://192.168.1.10:3001/api/auth/register", {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +126,6 @@ const SignUpPage = () => {
                 name="camera-outline"
                 size={24}
                 color="black"
-                // onPress={PickImage}
               />
             </View>
           )}

@@ -1,8 +1,11 @@
+import CategoryCourses from "../../Screens/HomeStackScreens/CategoryCourses";
 import Congratulations from "../../Screens/HomeStackScreens/Congratulations";
 import CourseDetails from "../../Screens/HomeStackScreens/CourseDetails";
 import SearchCourses from "../../Screens/HomeStackScreens/SearchCourses";
 import SeeAllCourses from "../../Screens/HomeStackScreens/SeeAllCourses";
+import ChangePassword from "../../Screens/ProfileStack/ChangePassword";
 import EditProfile from "../../Screens/ProfileStack/EditProfile";
+import Settings from "../../Screens/ProfileStack/Settings";
 import TabGroup from "../Tabs/TabGroup";
 const { createStackNavigator } = require("@react-navigation/stack");
 
@@ -25,13 +28,13 @@ const HomeStackGroup = () => {
         name="Course Details"
         component={CourseDetails}
       />
-      {/* <Stack.Screen
-        name="Category"
-        component={Category}
+      <Stack.Screen
+        name="CategoryCourses"
+        component={CategoryCourses}
         options={{
           headerTitleAlign: "center",
         }}
-      /> */}
+      />
       <Stack.Screen
         options={{
           headerTitleAlign: "center",
@@ -55,7 +58,7 @@ const HomeStackGroup = () => {
         name="edit profile"
         component={EditProfile}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         options={{
           headerTitleAlign: "center",
           headerTitle: "Settings",
@@ -65,7 +68,7 @@ const HomeStackGroup = () => {
         }}
         name="settings"
         component={Settings}
-      /> */}
+      />
       <Stack.Screen
         name="Search Courses"
         component={SearchCourses}
@@ -78,6 +81,17 @@ const HomeStackGroup = () => {
         component={Congratulations}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePassword}
+        options={{
+          headerTitleAlign: "center",
+          headerTitle: "Settings",
+          headerStyle: {
+            height: 100,
+          },
         }}
       />
     </Stack.Navigator>

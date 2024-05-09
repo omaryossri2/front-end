@@ -7,7 +7,7 @@ const SeeAllCourses = () => {
   const route = useRoute();
   const { params } = route;
 
-  console.log(params);
+  // console.log(params);
   return (
     <View>
       <FlatList

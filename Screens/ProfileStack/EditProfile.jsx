@@ -1,15 +1,15 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRoute } from "@react-navigation/native";
+import { AuthContext } from "../../context/AuthContext";
 
 const EditProfile = () => {
+  const { updateUser } = useContext(AuthContext);
   const route = useRoute();
 
   const {
     params: { user },
   } = route;
-
-  console.log(user);
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -62,7 +62,12 @@ const EditProfile = () => {
           />
         </View>
       </View>
-      <Pressable style={styles.btn}>
+      <Pressable
+        style={styles.btn}
+        onPress={() => {
+          updateUser(name, email, area, address, mobile);
+        }}
+      >
         <Text style={styles.btntxt}>Update Profile</Text>
       </Pressable>
     </View>

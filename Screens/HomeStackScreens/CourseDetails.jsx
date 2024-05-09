@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ImageBackground,
   StyleSheet,
@@ -6,31 +7,61 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { API_URL } from "@env";
 
 const CourseDetails = () => {
   const route = useRoute();
+
   const { navigate } = useNavigation();
   const {
-    params: { item, purchased },
+    params: { item, purchased, user },
   } = route;
+
+  // console.log(user.id);
+  // console.log(item.id);
+
+  const enrollCourse = async () => {
+    const res = await fetch(`${API_URL}/course/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user.id,
+        courseId: item.id,
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      Alert.alert("Success", data.message, [
+        {
+          text: "OK",
+          onPress: () => navigate("Congratulations"), // Navigate to Login screen
+        },
+      ]);
+    } else {
+      Alert.alert("Failed", "Record already exists");
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.img} source={require("../../assets/OIP.jpg")} />
+        <Image style={styles.img} source={{ uri: item.imagepath }} />
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.categoryContainer}>
-          <Text style={styles.categoryTitle}>Category</Text>
+          <Text style={styles.categoryTitle}>{item.category}</Text>
         </View>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.coursename}</Text>
         <View style={styles.ViewBorder}></View>
         <View style={styles.CourseDesc}>
           <Text style={styles.aboutTxt}>About Course</Text>
-          <Text style={styles.desc}>description</Text>
+          <Text style={styles.desc}>{item.description}</Text>
         </View>
       </View>
 
@@ -40,12 +71,7 @@ const CourseDetails = () => {
             <Text style={styles.totalPrice}>Total Price</Text>
             <Text style={styles.pricetxt}>${item.price}</Text>
           </View>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => {
-              navigate("Congratulations");
-            }}
-          >
+          <TouchableOpacity style={styles.btn} onPress={enrollCourse}>
             <Text style={styles.btnTxt}>Enroll Now</Text>
           </TouchableOpacity>
         </View>

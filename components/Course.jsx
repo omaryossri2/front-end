@@ -1,12 +1,39 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
+import { API_URL } from "@env";
 
 const Course = ({ item }) => {
   // console.log(item);
-
+  const { user } = useContext(AuthContext);
   const { navigate } = useNavigation();
+
+  const addtoCart = async () => {
+    const res = await fetch(`${API_URL}/cart/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user.id,
+        courseId: item.id,
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      Alert.alert("Success", data.msg, [
+        {
+          text: "OK",
+          onPress: () => navigate("Cart"), // Navigate to Login screen
+        },
+      ]);
+    } else {
+      Alert.alert("Failed", data.msg);
+    }
+  };
 
   return (
     <View style={styles.course}>
@@ -20,22 +47,23 @@ const Course = ({ item }) => {
             size={24}
             color="black"
             style={styles.icon}
+            onPress={addtoCart}
           />
         </View>
         <Pressable
           onPress={() => {
-            navigate("Course Details", { item });
+            navigate("Course Details", { item, user });
           }}
         >
           <Image
             source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/angularproject-a6182.appspot.com/o/uploads%2Fcourses%2FAdvCss.jpg?alt=media&token=c701db4c-5672-4dee-a31a-7f8619dd530f",
+              uri: item.imagepath,
             }}
             style={styles.img}
           />
         </Pressable>
       </View>
-      <Text style={styles.courseName}>{item.title}</Text>
+      <Text style={styles.courseName}>{item.coursename}</Text>
       <Text style={styles.coursePrice}>${item.price}</Text>
     </View>
   );

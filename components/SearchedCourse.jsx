@@ -1,32 +1,34 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContext } from "../context/AuthContext";
 
 const SearchedCourse = ({ item }) => {
+  const { user } = useContext(AuthContext);
   const { navigate } = useNavigation();
   return (
     <Pressable style={styles.myCourse}>
       <Pressable
         style={styles.imgContainer}
         onPress={() => {
-          navigate("Course Details", { item });
+          navigate("Course Details", { item, user });
         }}
       >
-        <Image style={styles.img} source={require("../assets/OIP.jpg")} />
+        <Image style={styles.img} source={{ uri: item.imagepath }} />
       </Pressable>
       <View style={styles.details}>
         <View style={styles.cart}>
           <View style={styles.categoryContainer}>
-            <Text style={styles.category}>category</Text>
+            <Text style={styles.category}>{item.category}</Text>
           </View>
 
           <View style={styles.cartContainer}>
-            <Ionicons name="cart" size={24} color="black" />
+            <Ionicons name="cart-outline" size={24} color="black" />
           </View>
         </View>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.coursename}</Text>
         <Text style={styles.price}>${item.price}</Text>
       </View>
     </Pressable>

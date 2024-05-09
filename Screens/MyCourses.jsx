@@ -6,13 +6,18 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MyCourse from "../components/MyCourse";
+import { AuthContext } from "../context/AuthContext";
+import { API_URL } from "@env";
 
 const MyCourses = () => {
+  const { user } = useContext(AuthContext);
+  const [allMyCourses, setAllMyCourses] = useState();
+
   const array = [
     { id: 1, title: "Course 1", price: 19.99 },
     { id: 2, title: "Course 2", price: 24.99 },
@@ -26,16 +31,28 @@ const MyCourses = () => {
 
   const purchased = route.name === "My Courses" ? true : false;
 
+  const getMyCourses = async () => {
+    const res = await fetch(`${API_URL}/Mycourse/${user.id}`);
+    const data = await res.json();
+    setAllMyCourses(data);
+  };
+
+  useEffect(() => {
+    getMyCourses();
+  }, [allMyCourses]);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={array}
-        renderItem={(item) => (
-          <MyCourse item={item.item} purchased={purchased} />
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </SafeAreaView>
+    allMyCourses && (
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={allMyCourses}
+          renderItem={(item) => (
+            <MyCourse item={item.item} purchased={purchased} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    )
   );
 };
 
