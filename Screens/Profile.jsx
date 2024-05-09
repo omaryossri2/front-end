@@ -1,24 +1,27 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
   const { navigate } = useNavigation();
+  const { logout, user } = useContext(AuthContext);
+  console.log(user);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profile}>
         <View style={styles.imgContainer}>
           <Ionicons name="person-outline" size={100} color="black" />
         </View>
-        <Text style={styles.userName}>sasas</Text>
+        <Text style={styles.userName}>{user.name}</Text>
       </View>
       <View style={styles.itemContainer}>
         <Pressable
           onPress={() => {
-            navigate("edit profile");
+            navigate("edit profile", { user });
           }}
           style={styles.item}
         >
@@ -35,7 +38,12 @@ const Profile = () => {
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
         </Pressable> */}
-        <Pressable style={styles.item}>
+        <Pressable
+          style={styles.item}
+          onPress={() => {
+            logout();
+          }}
+        >
           <View style={styles.edit}>
             <AntDesign name="logout" size={24} color="black" />
             <Text style={styles.txt}>Logout</Text>

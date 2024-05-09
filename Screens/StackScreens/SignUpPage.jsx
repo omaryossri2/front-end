@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,7 +16,7 @@ import * as FileSystem from "expo-file-system";
 
 const SignUpPage = () => {
   const { navigate } = useNavigation();
-  const [base64Image, setbase64Image] = useState();
+
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,20 +25,7 @@ const SignUpPage = () => {
   const [area, setArea] = useState("");
   const [mobile, setMobile] = useState("");
 
-  // const encode = async (uri) => {
-  //   const response = await fetch(uri);
-  //   const blob = await response.blob();
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       resolve(reader.result.split(",")[1]);
-  //     };
-  //     reader.onerror = reject;
-  //     reader.readAsDataURL(blob);
-  //   });
-  // };
-
-  const register = async () => {
+  const handleSignUp = async () => {
     try {
       const res = await fetch("http://192.168.1.10:3001/api/auth/register", {
         method: "POST",
@@ -45,7 +33,7 @@ const SignUpPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          profilePicture: base64Image,
+          profilePicture: "null",
           name: name,
           email: email,
           password: password,
@@ -67,48 +55,54 @@ const SignUpPage = () => {
         setAddress("");
         setArea("");
         setMobile("");
-        navigate("Login");
+        Alert.alert("Success", "User registered successfully!", [
+          {
+            text: "OK",
+            onPress: () => navigate("Login"), // Navigate to Login screen
+          },
+        ]);
       } else {
-        // console.log(res.data);
         console.error("Failed to Register");
+        Alert.alert("Error", "Failed to register user");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Failed to register user:", error);
+      Alert.alert("Error", "Failed to register user");
     }
   };
 
-  const PickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-      base64: true,
-    });
+  // const PickImage = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //     base64: true,
+  //   });
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-      // console.log(result);
-      const data = `data:${result.assets[0].mimeType};base64,${result.assets[0].base64} `;
-      setbase64Image(data);
-      console.log(data);
+  //   if (!result.canceled) {
+  //     setImage(result.assets[0].uri);
+  //     // console.log(result);
+  //     const data = `data:${result.assets[0].mimeType};base64,${result.assets[0].base64} `;
+  //     setbase64Image(data);
+  //     console.log(data);
 
-      try {
-        // let base64Imagee = await FileSystem.readAsStringAsync(
-        //   result.assets[0].uri,
-        //   {
-        //     encoding: FileSystem.EncodingType.Base64,
-        //   }
-        // );
-        // setbase64Image(base64Imagee);
-        // console.log(typeof base64Image);
-      } catch (error) {
-        console.error(error);
-      }
-      // const base64Image = await encode(result.assets[0].uri);
-      // console.log(base64Image);
-    }
-  };
+  //     try {
+  //       // let base64Imagee = await FileSystem.readAsStringAsync(
+  //       //   result.assets[0].uri,
+  //       //   {
+  //       //     encoding: FileSystem.EncodingType.Base64,
+  //       //   }
+  //       // );
+  //       // setbase64Image(base64Imagee);
+  //       // console.log(typeof base64Image);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //     // const base64Image = await encode(result.assets[0].uri);
+  //     // console.log(base64Image);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -133,7 +127,7 @@ const SignUpPage = () => {
                 name="camera-outline"
                 size={24}
                 color="black"
-                onPress={PickImage}
+                // onPress={PickImage}
               />
             </View>
           )}
@@ -192,7 +186,7 @@ const SignUpPage = () => {
           />
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={register}>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 

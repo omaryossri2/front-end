@@ -27,7 +27,12 @@ const Course = ({ item }) => {
             navigate("Course Details", { item });
           }}
         >
-          <Image source={require("../assets/OIP.jpg")} style={styles.img} />
+          <Image
+            source={{
+              uri: "https://firebasestorage.googleapis.com/v0/b/angularproject-a6182.appspot.com/o/uploads%2Fcourses%2FAdvCss.jpg?alt=media&token=c701db4c-5672-4dee-a31a-7f8619dd530f",
+            }}
+            style={styles.img}
+          />
         </Pressable>
       </View>
       <Text style={styles.courseName}>{item.title}</Text>

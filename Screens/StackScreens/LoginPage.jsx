@@ -1,7 +1,7 @@
 // components/LoginPage.js
 
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -10,9 +10,12 @@ import {
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginPage = () => {
   const { navigate } = useNavigation();
+
+  const { login } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +46,12 @@ const LoginPage = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          login(email, password);
+        }}
+      >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 

@@ -3,11 +3,19 @@ import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 
 const EditProfile = () => {
-  const [name, setName] = useState("user.name");
-  const [email, setEmail] = useState("user.email");
-  const [area, setArea] = useState("user.area");
-  const [address, setAddress] = useState("user.address");
-  const [mobile, setMobile] = useState("user.mobilenumber");
+  const route = useRoute();
+
+  const {
+    params: { user },
+  } = route;
+
+  console.log(user);
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [area, setArea] = useState(user.area);
+  const [address, setAddress] = useState(user.address);
+  const [mobile, setMobile] = useState(user.mobilenumber);
 
   return (
     <View style={styles.container}>

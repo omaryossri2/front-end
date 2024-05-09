@@ -1,18 +1,20 @@
 import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Categories from "../components/Categories";
 import Courses from "../components/Courses";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
   const [search, setSearch] = useState("");
   const { navigate } = useNavigation();
+  const { user } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <View style={styles.greeting}>
-        <Text style={[styles.clr, styles.userGreet]}>Hi, John</Text>
+        <Text style={[styles.clr, styles.userGreet]}>Hi, {user.name}</Text>
         <Text style={[styles.clr, styles.txt]}>Let's start learning!</Text>
         <Pressable
           style={styles.search}
