@@ -13,7 +13,16 @@ const AdminStack = () => {
     <stack.Navigator
       screenOptions={{
         headerRight: () => (
-          <TouchableOpacity style={{ marginRight: 10 }} onPress={logout}>
+          <TouchableOpacity
+            style={{
+              marginRight: 10,
+              backgroundColor: "red",
+              padding: 8,
+              borderRadius: 10,
+              marginEnd: 10,
+            }}
+            onPress={logout}
+          >
             <Text>Logout</Text>
           </TouchableOpacity>
         ),

@@ -26,6 +26,14 @@ const Cart = () => {
   //   { id: 3, title: "Course 3", price: 29.99 },
   // ];
 
+  if (!cartCourses || cartCourses.length === 0) {
+    return (
+      <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
+        <Text>No item in the cart</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     cartCourses && (
       <SafeAreaView style={styles.container}>
