@@ -4,9 +4,27 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { API_URL } from "@env";
 
 const AdminCourse = ({ item }) => {
   const { navigate } = useNavigation();
+
+  const deleteCourse = async () => {
+    // console.log(item);
+    const res = await fetch(`${API_URL}/api/deleteCourse/${item.id}`, {
+      method: "DELETE",
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      Alert.alert("Success", data.message);
+    } else {
+      Alert.alert("Failed", data.message);
+    }
+  };
+
+  
+
   return (
     <View style={styles.course}>
       <View style={styles.imgContainer}>
@@ -25,6 +43,7 @@ const AdminCourse = ({ item }) => {
               size={24}
               color="black"
               style={styles.icon}
+              onPress={deleteCourse}
             />
           </View>
         </View>

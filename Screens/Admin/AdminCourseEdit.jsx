@@ -1,6 +1,14 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
+import { API_URL } from "@env";
 
 const AdminCourseEdit = () => {
   const route = useRoute();
@@ -11,6 +19,27 @@ const AdminCourseEdit = () => {
   const [CourseName, setCourseName] = useState(item.coursename);
   const [CourseDesc, setCourseDesc] = useState(item.description);
   const [CoursePrice, setCoursePrice] = useState(item.price);
+
+  const updateCourse = async () => {
+    const res = await fetch(`${API_URL}/api/editCourse/${item.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: CourseName,
+        description: CourseDesc,
+        price: CoursePrice,
+        imagepath: item.imagepath,
+      }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      Alert.alert("Succeed", data.message);
+    } else {
+      Alert.alert("Failed", data.message);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +71,7 @@ const AdminCourseEdit = () => {
           />
         </View>
       </View>
-      <Pressable style={styles.btn}>
+      <Pressable style={styles.btn} onPress={updateCourse}>
         <Text style={styles.btntxt}>Update Course</Text>
       </Pressable>
     </View>
