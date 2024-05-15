@@ -1,6 +1,7 @@
 import CategoryCourses from "../../Screens/HomeStackScreens/CategoryCourses";
 import Congratulations from "../../Screens/HomeStackScreens/Congratulations";
 import CourseDetails from "../../Screens/HomeStackScreens/CourseDetails";
+import CreditCard from "../../Screens/HomeStackScreens/CreditCard";
 import SearchCourses from "../../Screens/HomeStackScreens/SearchCourses";
 import SeeAllCourses from "../../Screens/HomeStackScreens/SeeAllCourses";
 import ChangePassword from "../../Screens/ProfileStack/ChangePassword";
@@ -94,6 +95,7 @@ const HomeStackGroup = () => {
           },
         }}
       />
+      <Stack.Screen name="CreditCardScreen" component={CreditCard} />
     </Stack.Navigator>
   );
 };

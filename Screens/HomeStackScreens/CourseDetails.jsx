@@ -35,8 +35,8 @@ const CourseDetails = () => {
       }),
     });
 
+    const data = await res.json();
     if (res.ok) {
-      const data = await res.json();
       Alert.alert("Success", data.message, [
         {
           text: "OK",
@@ -44,7 +44,24 @@ const CourseDetails = () => {
         },
       ]);
     } else {
-      Alert.alert("Failed", "Record already exists");
+      if (data.message === "Insufficient balance") {
+        Alert.alert(
+          "Failed",
+          `${data.message}\n \nDo you want to increase your balance? \n`,
+          [
+            {
+              text: "Yes",
+              onPress: () => navigate("CreditCardScreen"), // Navigate to Credit Card screen
+            },
+            {
+              text: "No",
+              style: "cancel",
+            },
+          ]
+        );
+      } else {
+        Alert.alert("Failed", data.message);
+      }
     }
   };
 
