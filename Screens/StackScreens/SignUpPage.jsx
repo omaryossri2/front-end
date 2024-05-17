@@ -70,39 +70,6 @@ const SignUpPage = () => {
     }
   };
 
-  // const PickImage = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //     base64: true,
-  //   });
-
-  //   if (!result.canceled) {
-  //     setImage(result.assets[0].uri);
-  //     // console.log(result);
-  //     const data = `data:${result.assets[0].mimeType};base64,${result.assets[0].base64} `;
-  //     setbase64Image(data);
-  //     console.log(data);
-
-  //     try {
-  //       // let base64Imagee = await FileSystem.readAsStringAsync(
-  //       //   result.assets[0].uri,
-  //       //   {
-  //       //     encoding: FileSystem.EncodingType.Base64,
-  //       //   }
-  //       // );
-  //       // setbase64Image(base64Imagee);
-  //       // console.log(typeof base64Image);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //     // const base64Image = await encode(result.assets[0].uri);
-  //     // console.log(base64Image);
-  //   }
-  // };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -112,7 +79,7 @@ const SignUpPage = () => {
         </Text>
       </View>
       <View style={styles.inputsContainer}>
-        <View style={styles.imgContainer}>
+        {/* <View style={styles.imgContainer}>
           {image ? (
             <Image
               source={{ uri: image }}
@@ -129,7 +96,7 @@ const SignUpPage = () => {
               />
             </View>
           )}
-        </View>
+        </View> */}
 
         <View style={styles.txtContainer}>
           <Text>Name</Text>
@@ -153,6 +120,7 @@ const SignUpPage = () => {
             style={styles.textInput}
             placeholder="Password"
             onChangeText={setPassword}
+            secureTextEntry={true}
           />
         </View>
 

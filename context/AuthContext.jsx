@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       // console.log(data);
 
       setUser(data.user);
-      Alert.alert("Success", "User registered successfully!");
+      Alert.alert("Success", "User login successfully!");
     } else {
       Alert.alert("Error", "Failed to Sign in");
     }

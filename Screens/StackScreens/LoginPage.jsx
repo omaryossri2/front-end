@@ -42,6 +42,7 @@ const LoginPage = () => {
             style={styles.textInput}
             placeholder="Password"
             onChangeText={setPassword}
+            secureTextEntry={true}
           />
         </View>
       </View>
@@ -56,7 +57,7 @@ const LoginPage = () => {
       </TouchableOpacity>
 
       <View style={styles.DontHave}>
-        <Text>Already have an account</Text>
+        <Text>Don't have an account</Text>
         <Text
           onPress={() => {
             navigate("Sign Up");

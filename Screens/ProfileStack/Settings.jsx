@@ -11,7 +11,7 @@ const Settings = () => {
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <Pressable
+        {/* <Pressable
           style={styles.item}
           onPress={() => {
             navigate("Change Password");
@@ -22,7 +22,7 @@ const Settings = () => {
             <Text style={styles.txt}>Password Manager</Text>
           </View>
           <Ionicons name="arrow-forward" size={24} color="#0961f5" />
-        </Pressable>
+        </Pressable> */}
         <Pressable style={styles.item} onPress={deleteAccount}>
           <View style={styles.edit}>
             <MaterialCommunityIcons name="delete" size={24} color="black" />

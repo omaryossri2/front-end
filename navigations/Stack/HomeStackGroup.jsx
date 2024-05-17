@@ -95,7 +95,13 @@ const HomeStackGroup = () => {
           },
         }}
       />
-      <Stack.Screen name="CreditCardScreen" component={CreditCard} />
+      <Stack.Screen
+        name="CreditCardScreen"
+        component={CreditCard}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
